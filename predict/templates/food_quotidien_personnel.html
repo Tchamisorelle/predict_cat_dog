@@ -1,0 +1,191 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="../static/style.css">
+  <title>Alimentation_predict</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    form {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 5px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    input[type="submit"] {
+      background-color: #333;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #555;
+    }
+
+    .modal-dialog {
+      max-width: 500px;
+      margin: 30px auto;
+    }
+
+    .modal-content {
+      border-radius: 5px;
+    }
+
+    .modal-header {
+      background-color: #333;
+      color: #fff;
+      padding: 15px;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+    }
+
+    .modal-title {
+      margin: 0;
+      font-weight: bold;
+    }
+
+    .modal-body {
+      padding: 15px;
+    }
+
+    .modal-footer {
+      padding: 15px;
+      text-align: right;
+    }
+
+    .modal-footer .btn-secondary {
+      background-color: #ccc;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .modal-footer .btn-primary {
+      background-color: #333;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .modal-footer .btn-primary:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse justify-content-center text-center" id="navbar-ex-7">
+            <div class="navbar-nav">
+                <a class="navbar-brand nav-link" aria-current="page" href="{% url 'index' %}">Home</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'formulaire' %}">Donnee_Personnel</a>
+                <a class="nav-link" href="{% url 'result' %}">resultat</a>
+            </div>
+          
+        </div>
+    </div>
+</nav>
+
+  <!-- Bouton pour ouvrir le modal -->
+  <div class="container">
+    <h1>Formulaire</h1>
+    <form action="{% url 'food_quotidien_personnel' %}" method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="nom">Nom :</label>
+        <input type="text" id="nom" name="nom" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="aliment">Aliment :</label>
+        <input type="text" id="aliment" name="aliment" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="boisson">Boisson :</label>
+        <input type="text" id="boisson" name="boisson" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="fruit">Fruit :</label>
+        <input type="text" id="fruit" name="fruit" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="email">Email :</label>
+        <input type="email" id="email" name="email" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Maladie</label>
+        <input type="text" id="maladie" name="maladie" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Envoyer</button>
+      </div>
+    </form>
+    <!-- form.html -->
+    
+    
+  </div>
+  <div class="container">
+    <form method="post" action="{% url 'process_repas' %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Predict_personnel</button>
+    </form>
+    
+  </div>
+  
+
+
+  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+</body>
+
+</html>

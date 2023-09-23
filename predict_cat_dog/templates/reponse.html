@@ -1,0 +1,165 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link rel="stylesheet" href="{% static '../static/style.css' %}">
+    <link rel="stylesheet" href="{% static '../static/animate.css' %}">
+
+    <title>Image_predict</title>
+    <style>
+        /* Centrer verticalement le modal */
+        .modal {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Style du contenu du modal */
+        .modal-content {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Style du titre du modal */
+        .modal-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        /* Style du texte du modal */
+        .modal-body p {
+            font-size: 16px;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        /* Style du bouton de fermeture du modal */
+        .modal-header .btn-close {
+            padding: 0;
+            background-color: transparent;
+            border: none;
+            font-size: 24px;
+            color: #000;
+            opacity: 0.5;
+            transition: opacity 0.2s ease;
+        }
+        .message-info {
+            background-color: #ffcceb;
+            color: #004085;
+            padding: 10px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse justify-content-center text-center" id="navbar-ex-7">
+                <div class="navbar-nav">
+                    <a class="navbar-brand nav-link active" aria-current="page" href="../accueilir">Back</a>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+    <header>
+        <div id="messageContainer"></div>
+    </header>
+
+    <div class="modal animate__animated animate__swing show" tabindex="-1" aria-labelledby="swinganimationModalLabel"
+        aria-hidden="true" style="display: block;">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center">
+                    <h4 class="modal-title text-center" id="exampleModalLabel">Résultat de la reconnaissance</h4>
+                    <hr class="my-4 bg-dark">
+                    <button type="button" class="btn-close text-center bg-dark py-1" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            {% if result %}
+                            <p class="text-center">{{ result }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <a href="../accueilir/">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Retour</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        window.addEventListener('load', function () {
+            // Réinitialiser la prédiction en affectant une valeur vide à l'élément HTML correspondant
+            document.getElementById('prediction').innerText = '';
+        });
+    </script>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', function () {
+            var messageContainer = document.getElementById('messageContainer');
+
+            setTimeout(function () {
+                showMessage();
+            }, 2000); // Délai en millisecondes (5000 ms = 5 secondes)
+
+            function showMessage() {
+                var messageElement = document.createElement('div');
+                messageElement.className = 'message-info';
+                messageElement.textContent = "Ce model a une fiabilité de 71,42%!! il faut noter que le model a des pourcetages(28,57%) de chance de ne pas donnée de valeur vrai.   ";
+
+                messageContainer.appendChild(messageElement);
+
+                setTimeout(function () {
+                    messageContainer.removeChild(messageElement);
+                }, 10000); // Durée d'affichage du message en millisecondes (3000 ms = 3 secondes)
+            }
+        });
+
+
+    </script>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+    <footer class="content-footer footer bg-dark" style="margin-top: 605px;">
+        <div
+          class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 py-3">
+          <div>
+            <a href="#" target="_blank" class="footer-text fw-bolder" style="cursor: pointer;">Predict_Groups</a>©
+          </div>
+          <div>
+            <a href="#" class="footer-link me-4" target="_blank" style="cursor: pointer;">A propos</a>      
+            <a href="javascript:void(0)" class="footer-link me-4">Help</a>
+            <a href="javascript:void(0)" class="footer-link me-4">Contact</a>
+            
+          </div>
+        </div>
+      </footer>
+</body>
+
+</html>
